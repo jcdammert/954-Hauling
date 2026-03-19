@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --brand-dark: #1A212D;
+  --brand-gold: #F6D25A;
+  --brand-orange: #FF8C00;
+  --brand-gray: #6A7181;
+  --brand-light: #F5F5F0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  color: var(--brand-dark);
+  background: #fff;
+}
+
+/* Gold accent underline for headings */
+.gold-underline {
+  position: relative;
+  display: inline-block;
+}
+.gold-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--brand-gold);
+  border-radius: 2px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Service card hover */
+.service-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(26, 33, 45, 0.12);
+}
+.service-card:hover .service-icon {
+  background: var(--brand-gold);
+  color: var(--brand-dark);
+}
+
+/* CTA button styles */
+.btn-gold {
+  @apply inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm transition-all duration-300;
+  background: var(--brand-gold);
+  color: var(--brand-dark);
+}
+.btn-gold:hover {
+  background: #e5c24e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(246, 210, 90, 0.35);
+}
+.btn-outline {
+  @apply inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm transition-all duration-300 border-2;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.btn-outline:hover {
+  border-color: var(--brand-gold);
+  color: var(--brand-gold);
+}
