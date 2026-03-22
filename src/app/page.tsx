@@ -56,7 +56,7 @@ export default function Home() {
             {[
               { icon: '🛡️', text: 'Fully Licensed & Insured' },
               { icon: '⭐', text: '5-Star Rated Service' },
-              { icon: '🏆', text: '10+ Years Experience' },
+              { icon: '🏆', text: '4+ Years Experience' },
               { icon: '📍', text: 'Locally Owned & Operated' },
             ].map((badge) => (
               <div
