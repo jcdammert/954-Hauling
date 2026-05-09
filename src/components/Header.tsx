@@ -93,7 +93,7 @@ export default function Header() {
 
               {servicesOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2">
-                  <div className="w-[520px] bg-brand-dark/98 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-3 animate-fade-in">
+                  <div className="w-[520px] bg-[#1A212D] border border-white/10 rounded-2xl shadow-2xl p-3 animate-fade-in">
                     <Link
                       href="/services"
                       className="flex items-center justify-between px-4 py-3 mb-1 rounded-xl bg-brand-gold/8 hover:bg-brand-gold/15 transition-colors"
@@ -133,7 +133,7 @@ export default function Header() {
 
               {areasOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2">
-                  <div className="w-[480px] bg-brand-dark/98 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-5 animate-fade-in">
+                  <div className="w-[480px] bg-[#1A212D] border border-white/10 rounded-2xl shadow-2xl p-5 animate-fade-in">
                     <div className="grid grid-cols-3 gap-5">
                       {allAreas.map((group) => (
                         <div key={group.label}>

@@ -97,7 +97,7 @@ export default function ServicePage({ params }: Props) {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="gradient-dark rounded-2xl p-7 text-white mb-6 sticky top-24">
+              <div className="gradient-dark rounded-2xl p-7 text-white mb-6">
                 <h3 className="font-semibold text-lg mb-2">
                   Get a Free {service.title} Quote
                 </h3>
