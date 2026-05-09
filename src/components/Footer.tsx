@@ -22,7 +22,7 @@ export default function Footer() {
             </h3>
             <p className="text-white/40 text-sm leading-relaxed mb-6">
               South Florida&apos;s most trusted hauling, moving, and junk removal
-              company. Locally owned and operated for over 10 years.
+              company. Locally owned and operated for over 5 years.
             </p>
             <div className="space-y-2.5">
               <a

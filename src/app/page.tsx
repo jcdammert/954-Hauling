@@ -28,7 +28,7 @@ export default function Home() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8">
               <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              <span className="text-white/60 text-xs font-medium">Serving South Florida Since 2020</span>
+              <span className="text-white/60 text-xs font-medium">Serving South Florida Since 2021</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight mb-6">
@@ -59,7 +59,7 @@ export default function Home() {
             {[
               { icon: Shield, text: 'Fully Licensed & Insured' },
               { icon: Star, text: '5-Star Rated Service' },
-              { icon: Award, text: '4+ Years Experience' },
+              { icon: Award, text: '5+ Years Experience' },
               { icon: MapPin, text: 'Locally Owned & Operated' },
             ].map((badge) => (
               <div
