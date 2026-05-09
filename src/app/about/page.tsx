@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PHONE, PHONE_HREF } from '@/lib/data';
+import { ShieldCheck, Star, Clock, CircleDollarSign, Phone } from '@/components/Icons';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -12,18 +13,18 @@ export default function AboutPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-brand-dark text-white pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="gradient-dark text-white pt-32 pb-16 md:pt-40 md:pb-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-white/40 text-sm mb-4">
               <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
               <span>/</span>
               <span className="text-brand-gold">About</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4">
-              ABOUT <span className="text-brand-gold">954 HAULING</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+              About <span className="text-brand-gold">954 Hauling</span>
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed">
+            <p className="text-white/50 text-lg leading-relaxed">
               Locally owned, fully licensed & insured, and committed to being
               South Florida&apos;s most reliable hauling and moving company.
             </p>
@@ -33,8 +34,8 @@ export default function AboutPage() {
 
       {/* Content */}
       <section className="py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-black text-brand-dark mb-6">Our Story</h2>
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-extrabold text-brand-dark mb-6">Our Story</h2>
           <p className="text-brand-gray text-lg leading-relaxed mb-6">
             954 Hauling was founded with a simple mission: deliver honest,
             reliable hauling and moving services to the people of South Florida.
@@ -43,7 +44,7 @@ export default function AboutPage() {
             residential and commercial customers across Broward, Miami-Dade, and
             Palm Beach counties.
           </p>
-          <p className="text-brand-gray leading-relaxed mb-10">
+          <p className="text-brand-gray leading-relaxed mb-12">
             We believe in doing things the right way — showing up on time,
             communicating clearly, pricing fairly, and treating every
             customer&apos;s belongings like our own. That commitment to
@@ -51,38 +52,40 @@ export default function AboutPage() {
             loyal customers who trust us with their most important jobs.
           </p>
 
-          <h2 className="text-2xl font-black text-brand-dark mb-6">
+          <h2 className="text-2xl font-extrabold text-brand-dark mb-6">
             Why Customers Choose Us
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
             {[
               {
-                icon: '🛡️',
+                icon: ShieldCheck,
                 title: 'Licensed & Insured',
                 desc: 'Full liability coverage and workers\' compensation for your peace of mind.',
               },
               {
-                icon: '⭐',
+                icon: Star,
                 title: '5-Star Service',
                 desc: 'Consistently rated 5 stars by customers across South Florida.',
               },
               {
-                icon: '⏰',
+                icon: Clock,
                 title: 'Always On Time',
                 desc: 'We respect your time. Our crews arrive when promised, every time.',
               },
               {
-                icon: '💰',
+                icon: CircleDollarSign,
                 title: 'Fair & Transparent Pricing',
                 desc: 'No hidden fees. Free estimates so you know exactly what to expect.',
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="bg-gray-50 rounded-lg p-6 border border-gray-100"
+                className="card p-6"
               >
-                <span className="text-2xl mb-3 block">{item.icon}</span>
-                <h3 className="font-bold text-brand-dark mb-2">{item.title}</h3>
+                <div className="icon-box-gold mb-4">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-semibold text-brand-dark mb-1.5">{item.title}</h3>
                 <p className="text-sm text-brand-gray leading-relaxed">
                   {item.desc}
                 </p>
@@ -90,7 +93,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <h2 className="text-2xl font-black text-brand-dark mb-6">
+          <h2 className="text-2xl font-extrabold text-brand-dark mb-6">
             Our Service Area
           </h2>
           <p className="text-brand-gray leading-relaxed mb-6">
@@ -103,24 +106,22 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-gold py-14">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-brand-dark mb-4">
-            READY TO WORK WITH US?
+      <section className="gradient-gold py-14">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-dark mb-4">
+            Ready to Work With Us?
           </h2>
-          <p className="text-brand-dark/70 mb-6">
+          <p className="text-brand-dark/60 mb-6">
             Get your free estimate today.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={PHONE_HREF}
-              className="inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm bg-brand-dark text-white"
-            >
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href={PHONE_HREF} className="btn-dark">
+              <Phone className="w-4 h-4 mr-2" />
               CALL {PHONE}
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all"
+              className="inline-flex items-center justify-center font-semibold tracking-wide text-sm uppercase px-7 py-3.5 rounded-xl border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all duration-300"
             >
               GET A FREE QUOTE
             </Link>

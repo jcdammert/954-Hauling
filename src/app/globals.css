@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
   --brand-dark: #1A212D;
   --brand-gold: #F6D25A;
   --brand-orange: #FF8C00;
   --brand-gray: #6A7181;
-  --brand-light: #F5F5F0;
+  --brand-light: #F7F7F5;
 }
 
 html {
@@ -17,73 +17,120 @@ html {
 }
 
 body {
-  font-family: 'Public Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--brand-dark);
   background: #fff;
 }
 
-/* Gold accent underline for headings */
-.gold-underline {
-  position: relative;
-  display: inline-block;
-}
-.gold-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background: var(--brand-gold);
-  border-radius: 2px;
-}
-
 /* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 500px; }
 }
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+  overflow: hidden;
 }
 
-/* Service card hover */
-.service-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(26, 33, 45, 0.12);
-}
-.service-card:hover .service-icon {
+/* Buttons */
+.btn-primary {
+  @apply inline-flex items-center justify-center font-semibold text-sm px-7 py-3.5 rounded-xl transition-all duration-300;
   background: var(--brand-gold);
   color: var(--brand-dark);
 }
+.btn-primary:hover {
+  background: #e5c24e;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(246, 210, 90, 0.3);
+}
 
-/* CTA button styles */
 .btn-gold {
-  @apply inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm transition-all duration-300;
+  @apply inline-flex items-center justify-center font-semibold tracking-wide text-sm uppercase px-7 py-3.5 rounded-xl transition-all duration-300;
   background: var(--brand-gold);
   color: var(--brand-dark);
 }
 .btn-gold:hover {
   background: #e5c24e;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(246, 210, 90, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(246, 210, 90, 0.3);
 }
+
 .btn-outline {
-  @apply inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm transition-all duration-300 border-2;
-  border-color: rgba(255, 255, 255, 0.3);
+  @apply inline-flex items-center justify-center font-semibold tracking-wide text-sm uppercase px-7 py-3.5 rounded-xl transition-all duration-300 border-2;
+  border-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 .btn-outline:hover {
   border-color: var(--brand-gold);
   color: var(--brand-gold);
+}
+
+.btn-dark {
+  @apply inline-flex items-center justify-center font-semibold tracking-wide text-sm uppercase px-7 py-3.5 rounded-xl transition-all duration-300;
+  background: var(--brand-dark);
+  color: #fff;
+}
+.btn-dark:hover {
+  background: #252d3b;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(26, 33, 45, 0.25);
+}
+
+/* Cards */
+.card {
+  @apply bg-white rounded-2xl border border-gray-100 transition-all duration-300;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(26, 33, 45, 0.08);
+  transform: translateY(-2px);
+}
+
+.card-dark {
+  @apply rounded-2xl transition-all duration-300;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.card-dark:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Icon containers */
+.icon-box {
+  @apply w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300;
+  background: rgba(26, 33, 45, 0.04);
+  color: var(--brand-dark);
+}
+.icon-box-gold {
+  @apply w-11 h-11 rounded-xl flex items-center justify-center;
+  background: rgba(246, 210, 90, 0.12);
+  color: var(--brand-gold);
+}
+
+/* Section divider */
+.section-label {
+  @apply text-xs font-semibold uppercase tracking-[0.2em] mb-4;
+  color: var(--brand-gold);
+}
+
+/* Gradient overlays */
+.gradient-dark {
+  background: linear-gradient(135deg, #1A212D 0%, #252d3b 100%);
+}
+.gradient-gold {
+  background: linear-gradient(135deg, #F6D25A 0%, #f0c83d 100%);
 }

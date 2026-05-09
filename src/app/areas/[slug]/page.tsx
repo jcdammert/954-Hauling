@@ -9,6 +9,7 @@ import {
   PHONE,
   PHONE_HREF,
 } from '@/lib/data';
+import { ServiceIcon, Check, Phone } from '@/components/Icons';
 
 const allAreas = [
   ...browardAreas.map((a) => ({ ...a, county: 'Broward County' })),
@@ -44,21 +45,21 @@ export default function AreaPage({ params }: Props) {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-brand-dark text-white pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="gradient-dark text-white pt-32 pb-16 md:pt-40 md:pb-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-white/40 text-sm mb-4">
               <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
               <span>/</span>
-              <span className="text-brand-gold">Areas</span>
-              <span>/</span>
               <span className="text-white/60">{area.county}</span>
+              <span>/</span>
+              <span className="text-brand-gold">{area.name}</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4">
-              HAULING & MOVING IN{' '}
-              <span className="text-brand-gold">{area.name.toUpperCase()}, FL</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+              Hauling & Moving in{' '}
+              <span className="text-brand-gold">{area.name}, FL</span>
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed max-w-xl">
+            <p className="text-white/50 text-lg leading-relaxed max-w-xl">
               Professional hauling, moving, and junk removal services in{' '}
               {area.name} and throughout {area.county}. Fully licensed & insured.
             </p>
@@ -68,10 +69,10 @@ export default function AreaPage({ params }: Props) {
 
       {/* Content */}
       <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-black text-brand-dark mb-6">
+              <h2 className="text-2xl font-extrabold text-brand-dark mb-6">
                 Trusted Hauling & Moving Services in {area.name}
               </h2>
               <p className="text-brand-gray text-lg leading-relaxed mb-6">
@@ -89,78 +90,72 @@ export default function AreaPage({ params }: Props) {
                 professionalism and care.
               </p>
 
-              <h2 className="text-2xl font-black text-brand-dark mb-6">
+              <h2 className="text-2xl font-extrabold text-brand-dark mb-6">
                 Services Available in {area.name}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
                 {services.map((s) => (
                   <Link
                     key={s.slug}
                     href={`/services/${s.slug}`}
-                    className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-brand-gold/10 transition-colors group"
+                    className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-brand-gold/8 transition-colors group"
                   >
-                    <span className="text-lg">{s.icon}</span>
-                    <span className="text-sm font-semibold text-brand-dark group-hover:text-brand-orange transition-colors">
+                    <ServiceIcon slug={s.slug} className="w-4 h-4 text-brand-gray group-hover:text-brand-dark transition-colors" />
+                    <span className="text-sm font-medium text-brand-dark">
                       {s.title}
                     </span>
                   </Link>
                 ))}
               </div>
 
-              <h2 className="text-2xl font-black text-brand-dark mb-4">
+              <h2 className="text-2xl font-extrabold text-brand-dark mb-4">
                 Why {area.name} Chooses 954 Hauling
               </h2>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <span className="text-brand-gold mt-1">✓</span>
-                  <span className="text-brand-gray">Fast response times for {area.name} and surrounding areas</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-brand-gold mt-1">✓</span>
-                  <span className="text-brand-gray">Competitive, transparent pricing with free estimates</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-brand-gold mt-1">✓</span>
-                  <span className="text-brand-gray">Same-day service available for urgent jobs</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-brand-gold mt-1">✓</span>
-                  <span className="text-brand-gray">5-star rated by {area.name} customers</span>
-                </li>
-              </ul>
+              <div className="space-y-3 mb-8">
+                {[
+                  `Fast response times for ${area.name} and surrounding areas`,
+                  'Competitive, transparent pricing with free estimates',
+                  'Same-day service available for urgent jobs',
+                  `5-star rated by ${area.name} customers`,
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-md bg-brand-gold/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-brand-gold" />
+                    </div>
+                    <span className="text-brand-gray text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-brand-dark rounded-lg p-8 text-white mb-8 sticky top-28">
-                <h3 className="font-bold text-lg mb-3">
+              <div className="gradient-dark rounded-2xl p-7 text-white mb-6 sticky top-24">
+                <h3 className="font-semibold text-lg mb-2">
                   Get a Free Quote in {area.name}
                 </h3>
-                <p className="text-white/50 text-sm mb-6">
+                <p className="text-white/40 text-sm mb-6">
                   Call now for fast, friendly service.
                 </p>
                 <a href={PHONE_HREF} className="btn-gold w-full text-center mb-3">
+                  <Phone className="w-4 h-4 mr-2" />
                   CALL {PHONE}
                 </a>
-                <Link
-                  href="/contact"
-                  className="btn-outline w-full text-center !border-white/20"
-                >
+                <Link href="/contact" className="btn-outline w-full text-center">
                   REQUEST QUOTE ONLINE
                 </Link>
               </div>
 
-              {/* Nearby areas */}
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h4 className="font-bold text-brand-dark text-sm uppercase tracking-wider mb-4">
+              <div className="bg-gray-50 rounded-2xl p-6">
+                <h4 className="font-semibold text-brand-dark text-sm mb-4">
                   Nearby Areas in {area.county}
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {sameCounty.map((a) => (
                     <li key={a.slug}>
                       <Link
                         href={`/areas/${a.slug}`}
-                        className="text-sm text-brand-gray hover:text-brand-orange transition-colors"
+                        className="text-sm text-brand-gray hover:text-brand-dark transition-colors"
                       >
                         {a.name}, FL
                       </Link>
@@ -174,24 +169,22 @@ export default function AreaPage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-gold py-14">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-brand-dark mb-4">
-            READY TO GET STARTED IN {area.name.toUpperCase()}?
+      <section className="gradient-gold py-14">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-dark mb-4">
+            Ready to Get Started in {area.name}?
           </h2>
-          <p className="text-brand-dark/70 mb-6">
+          <p className="text-brand-dark/60 mb-6">
             Call now or request your free quote online.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={PHONE_HREF}
-              className="inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm bg-brand-dark text-white"
-            >
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href={PHONE_HREF} className="btn-dark">
+              <Phone className="w-4 h-4 mr-2" />
               CALL {PHONE}
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all"
+              className="inline-flex items-center justify-center font-semibold tracking-wide text-sm uppercase px-7 py-3.5 rounded-xl border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all duration-300"
             >
               GET A FREE QUOTE
             </Link>

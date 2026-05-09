@@ -9,39 +9,42 @@ import {
   testimonials,
   faqs,
 } from '@/lib/data';
+import { ServiceIcon, Shield, Star, Award, MapPin, Check, Quote, Phone, ChevronRight } from '@/components/Icons';
 import FAQ from '@/components/FAQ';
 
 export default function Home() {
   return (
     <main>
       {/* ───── HERO ───── */}
-      <section className="relative bg-brand-dark text-white pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-        {/* Subtle grid bg */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
+      <section className="relative gradient-dark text-white pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
+          backgroundSize: '32px 32px',
+        }} />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-gold/3 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.05] tracking-tight mb-6">
-              SOUTH FLORIDA&apos;S MOST TRUSTED{' '}
-              <span className="text-brand-gold">HAULING & MOVING</span> COMPANY
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+              <span className="text-white/60 text-xs font-medium">Serving South Florida Since 2020</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight mb-6">
+              South Florida&apos;s Most Trusted{' '}
+              <span className="text-brand-gold">Hauling & Moving</span> Company
             </h1>
-            <p className="text-white/60 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+            <p className="text-white/50 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
               Locally owned. Fully licensed & insured. Serving all of Broward,
               Miami-Dade, and Palm Beach counties.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/contact" className="btn-gold">
                 GET YOUR FREE ESTIMATE
               </Link>
               <a href={PHONE_HREF} className="btn-outline">
+                <Phone className="w-4 h-4 mr-2" />
                 {PHONE}
               </a>
             </div>
@@ -50,21 +53,23 @@ export default function Home() {
       </section>
 
       {/* ───── TRUST BADGES ───── */}
-      <section className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <section className="bg-white border-b border-gray-50">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { icon: '🛡️', text: 'Fully Licensed & Insured' },
-              { icon: '⭐', text: '5-Star Rated Service' },
-              { icon: '🏆', text: '4+ Years Experience' },
-              { icon: '📍', text: 'Locally Owned & Operated' },
+              { icon: Shield, text: 'Fully Licensed & Insured' },
+              { icon: Star, text: '5-Star Rated Service' },
+              { icon: Award, text: '4+ Years Experience' },
+              { icon: MapPin, text: 'Locally Owned & Operated' },
             ].map((badge) => (
               <div
                 key={badge.text}
-                className="flex items-center gap-3 justify-center text-center md:text-left md:justify-start"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-50/80"
               >
-                <span className="text-2xl">{badge.icon}</span>
-                <span className="text-sm font-bold text-brand-dark uppercase tracking-wide">
+                <div className="icon-box-gold flex-shrink-0">
+                  <badge.icon className="w-4.5 h-4.5" />
+                </div>
+                <span className="text-xs font-semibold text-brand-dark leading-tight">
                   {badge.text}
                 </span>
               </div>
@@ -75,25 +80,25 @@ export default function Home() {
 
       {/* ───── SERVICES ───── */}
       <section className="bg-white py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-brand-dark mb-3">
-              OUR SERVICES
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="max-w-xl mb-12">
+            <p className="section-label">What We Do</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark">
+              Our Services
             </h2>
-            <div className="w-16 h-1 bg-brand-gold mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {services.map((s) => (
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="service-card group block bg-gray-50 rounded-lg p-6 border border-gray-100"
+                className="card group block p-5"
               >
-                <div className="service-icon w-12 h-12 rounded-lg bg-brand-dark/5 flex items-center justify-center text-xl mb-4 transition-all duration-300">
-                  {s.icon}
+                <div className="icon-box group-hover:bg-brand-gold group-hover:text-brand-dark mb-4">
+                  <ServiceIcon slug={s.slug} className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-brand-dark mb-2 group-hover:text-brand-orange transition-colors">
+                <h3 className="font-semibold text-brand-dark text-[15px] mb-1.5 group-hover:text-brand-orange transition-colors">
                   {s.title}
                 </h3>
                 <p className="text-sm text-brand-gray leading-relaxed">
@@ -107,15 +112,15 @@ export default function Home() {
 
       {/* ───── HOW IT WORKS ───── */}
       <section className="bg-brand-light py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-brand-dark mb-3">
-              HOW IT WORKS
+            <p className="section-label">Simple Process</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark">
+              How It Works
             </h2>
-            <div className="w-16 h-1 bg-brand-gold mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               {
                 step: '01',
@@ -133,11 +138,11 @@ export default function Home() {
                 desc: 'We complete the work efficiently, clean up the site, and leave you completely satisfied.',
               },
             ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold text-brand-dark font-black text-lg mb-5">
+              <div key={item.step} className="bg-white rounded-2xl p-7 text-center border border-gray-100">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-dark text-brand-gold font-extrabold text-sm mb-5">
                   {item.step}
                 </div>
-                <h3 className="font-bold text-lg text-brand-dark mb-3">
+                <h3 className="font-semibold text-[15px] text-brand-dark mb-2.5">
                   {item.title}
                 </h3>
                 <p className="text-sm text-brand-gray leading-relaxed">
@@ -151,110 +156,68 @@ export default function Home() {
 
       {/* ───── AREAS WE SERVE ───── */}
       <section className="bg-white py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-brand-dark mb-3">
-              AREAS WE SERVE
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="max-w-xl mb-12">
+            <p className="section-label">Coverage</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark">
+              Areas We Serve
             </h2>
-            <div className="w-16 h-1 bg-brand-gold mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* Broward */}
-            <div>
-              <h3 className="font-bold text-lg text-brand-dark mb-4 pb-2 border-b-2 border-brand-gold">
-                Broward County
-              </h3>
-              <ul className="space-y-2">
-                {browardAreas.map((a) => (
-                  <li key={a.slug}>
-                    <Link
-                      href={`/areas/${a.slug}`}
-                      className="text-sm text-brand-gray hover:text-brand-orange transition-colors"
-                    >
-                      {a.name}, FL
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Miami-Dade */}
-            <div>
-              <h3 className="font-bold text-lg text-brand-dark mb-4 pb-2 border-b-2 border-brand-gold">
-                Miami-Dade County
-              </h3>
-              <ul className="space-y-2">
-                {miamiAreas.map((a) => (
-                  <li key={a.slug}>
-                    <Link
-                      href={`/areas/${a.slug}`}
-                      className="text-sm text-brand-gray hover:text-brand-orange transition-colors"
-                    >
-                      {a.name}, FL
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Palm Beach */}
-            <div>
-              <h3 className="font-bold text-lg text-brand-dark mb-4 pb-2 border-b-2 border-brand-gold">
-                Palm Beach County
-              </h3>
-              <ul className="space-y-2">
-                {palmBeachAreas.map((a) => (
-                  <li key={a.slug}>
-                    <Link
-                      href={`/areas/${a.slug}`}
-                      className="text-sm text-brand-gray hover:text-brand-orange transition-colors"
-                    >
-                      {a.name}, FL
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { label: 'Broward County', areas: browardAreas },
+              { label: 'Miami-Dade County', areas: miamiAreas },
+              { label: 'Palm Beach County', areas: palmBeachAreas },
+            ].map((group) => (
+              <div key={group.label} className="bg-gray-50/80 rounded-2xl p-6">
+                <h3 className="font-semibold text-brand-dark text-sm mb-4 pb-3 border-b border-gray-200">
+                  {group.label}
+                </h3>
+                <ul className="space-y-1.5">
+                  {group.areas.map((a) => (
+                    <li key={a.slug}>
+                      <Link
+                        href={`/areas/${a.slug}`}
+                        className="flex items-center gap-2 text-sm text-brand-gray hover:text-brand-dark transition-colors py-0.5 group"
+                      >
+                        <ChevronRight className="w-3 h-3 opacity-0 -ml-4 group-hover:opacity-50 group-hover:ml-0 transition-all" />
+                        {a.name}, FL
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ───── TESTIMONIALS ───── */}
-      <section className="bg-brand-dark py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="gradient-dark py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-white mb-3">
-              WHAT OUR CUSTOMERS SAY
+            <p className="section-label">Testimonials</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+              What Our Customers Say
             </h2>
-            <div className="w-16 h-1 bg-brand-gold mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((t, i) => (
-              <div
-                key={i}
-                className="bg-white/5 border border-white/10 rounded-lg p-8"
-              >
-                {/* Stars */}
+              <div key={i} className="card-dark p-7">
+                <Quote className="w-8 h-8 text-brand-gold/20 mb-4" />
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
-                    <svg
-                      key={j}
-                      className="w-5 h-5 text-brand-gold"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                    <Star key={j} className="w-4 h-4 text-brand-gold fill-brand-gold" />
                   ))}
                 </div>
-                <p className="text-white/70 text-sm leading-relaxed mb-6 italic">
+                <p className="text-white/60 text-sm leading-relaxed mb-6">
                   &ldquo;{t.text}&rdquo;
                 </p>
-                <div>
-                  <p className="text-white font-bold text-sm">{t.name}</p>
-                  <p className="text-white/40 text-xs">{t.location}</p>
+                <div className="pt-4 border-t border-white/5">
+                  <p className="text-white font-semibold text-sm">{t.name}</p>
+                  <p className="text-white/30 text-xs mt-0.5">{t.location}</p>
                 </div>
               </div>
             ))}
@@ -264,12 +227,12 @@ export default function Home() {
 
       {/* ───── FAQ ───── */}
       <section className="bg-white py-20 md:py-28">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight text-brand-dark mb-3">
-              FREQUENTLY ASKED QUESTIONS
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="section-label">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark">
+              Frequently Asked Questions
             </h2>
-            <div className="w-16 h-1 bg-brand-gold mx-auto rounded-full" />
           </div>
 
           <div className="space-y-3">
@@ -281,24 +244,22 @@ export default function Home() {
       </section>
 
       {/* ───── CTA ───── */}
-      <section className="bg-brand-gold py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-brand-dark mb-4">
-            READY TO GET STARTED?
+      <section className="gradient-gold py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-dark mb-4">
+            Ready to Get Started?
           </h2>
-          <p className="text-brand-dark/70 text-lg mb-8">
+          <p className="text-brand-dark/60 text-lg mb-8">
             Call us now or request your free quote online.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={PHONE_HREF}
-              className="inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm bg-brand-dark text-white hover:bg-brand-dark/90 transition-all"
-            >
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href={PHONE_HREF} className="btn-dark">
+              <Phone className="w-4 h-4 mr-2" />
               CALL {PHONE}
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center font-bold tracking-wider text-sm uppercase px-8 py-4 rounded-sm border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all"
+              className="inline-flex items-center justify-center font-semibold tracking-wide text-sm uppercase px-7 py-3.5 rounded-xl border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all duration-300"
             >
               GET A FREE QUOTE
             </Link>

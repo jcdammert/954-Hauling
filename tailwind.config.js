@@ -13,12 +13,15 @@ module.exports = {
           gold: '#F6D25A',
           orange: '#FF8C00',
           gray: '#6A7181',
-          light: '#F5F5F0',
+          light: '#F7F7F5',
         },
       },
       fontFamily: {
-        heading: ['"Public Sans"', 'sans-serif'],
-        body: ['"Public Sans"', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.25rem',
       },
     },
   },

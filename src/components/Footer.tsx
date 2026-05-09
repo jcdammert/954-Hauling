@@ -8,40 +8,43 @@ import {
   miamiAreas,
   palmBeachAreas,
 } from '@/lib/data';
+import { Phone, Mail } from '@/components/Icons';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#141413] text-white/70">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand column */}
+    <footer className="bg-[#12161f] text-white/60">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+          {/* Brand */}
           <div>
-            <h3 className="text-white font-black text-2xl tracking-tight mb-4">
+            <h3 className="text-white font-extrabold text-xl tracking-tight mb-4">
               954 HAULING
             </h3>
-            <p className="text-white/50 text-sm leading-relaxed mb-6">
+            <p className="text-white/40 text-sm leading-relaxed mb-6">
               South Florida&apos;s most trusted hauling, moving, and junk removal
               company. Locally owned and operated for over 10 years.
             </p>
-            <div className="space-y-2 text-sm">
+            <div className="space-y-2.5">
               <a
                 href={PHONE_HREF}
-                className="block text-brand-gold hover:text-brand-gold/80 font-semibold transition-colors"
+                className="flex items-center gap-2.5 text-sm text-brand-gold hover:text-brand-gold/80 font-medium transition-colors"
               >
+                <Phone className="w-3.5 h-3.5" />
                 {PHONE}
               </a>
               <a
                 href={`mailto:${EMAIL}`}
-                className="block hover:text-white transition-colors"
+                className="flex items-center gap-2.5 text-sm hover:text-white transition-colors"
               >
+                <Mail className="w-3.5 h-3.5" />
                 {EMAIL}
               </a>
             </div>
           </div>
 
-          {/* Services column */}
+          {/* Services */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="text-white font-semibold text-sm mb-4">
               Our Services
             </h4>
             <ul className="space-y-2">
@@ -49,7 +52,7 @@ export default function Footer() {
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="text-sm hover:text-brand-gold transition-colors"
+                    className="text-sm hover:text-white transition-colors"
                   >
                     {s.title}
                   </Link>
@@ -58,9 +61,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Areas - Broward */}
+          {/* Broward */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="text-white font-semibold text-sm mb-4">
               Broward County
             </h4>
             <ul className="space-y-2">
@@ -68,7 +71,7 @@ export default function Footer() {
                 <li key={a.slug}>
                   <Link
                     href={`/areas/${a.slug}`}
-                    className="text-sm hover:text-brand-gold transition-colors"
+                    className="text-sm hover:text-white transition-colors"
                   >
                     {a.name}
                   </Link>
@@ -77,24 +80,24 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Areas - Miami-Dade & Palm Beach */}
+          {/* Miami-Dade & Palm Beach */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="text-white font-semibold text-sm mb-4">
               Miami-Dade County
             </h4>
-            <ul className="space-y-2 mb-6">
+            <ul className="space-y-2 mb-8">
               {miamiAreas.map((a) => (
                 <li key={a.slug}>
                   <Link
                     href={`/areas/${a.slug}`}
-                    className="text-sm hover:text-brand-gold transition-colors"
+                    className="text-sm hover:text-white transition-colors"
                   >
                     {a.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
+            <h4 className="text-white font-semibold text-sm mb-4">
               Palm Beach County
             </h4>
             <ul className="space-y-2">
@@ -102,7 +105,7 @@ export default function Footer() {
                 <li key={a.slug}>
                   <Link
                     href={`/areas/${a.slug}`}
-                    className="text-sm hover:text-brand-gold transition-colors"
+                    className="text-sm hover:text-white transition-colors"
                   >
                     {a.name}
                   </Link>
@@ -112,14 +115,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40">
+        <div className="mt-14 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/30">
           <p>&copy; {new Date().getFullYear()} 954 Hauling. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="hover:text-white/60 transition-colors">
+            <Link href="/privacy-policy" className="hover:text-white/50 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="hover:text-white/60 transition-colors">
+            <Link href="/terms-of-service" className="hover:text-white/50 transition-colors">
               Terms of Service
             </Link>
           </div>
