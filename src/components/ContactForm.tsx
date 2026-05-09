@@ -6,27 +6,35 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     const form = e.currentTarget;
     const data = new FormData(form);
-    const payload = Object.fromEntries(data.entries());
+    const payload = {
+      ...Object.fromEntries(data.entries()),
+      hear_about: data.getAll('hear_about').join(', '),
+    };
 
-    // TODO: Wire to GHL webhook
-    // Example: await fetch('YOUR_GHL_WEBHOOK_URL', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(payload),
-    // });
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    console.log('Form submission:', payload);
+      if (!res.ok) throw new Error('Submission failed');
 
-    // Simulate submission
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitted(true);
-    setLoading(false);
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please call us at (954) 666-5517.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -159,6 +167,40 @@ export default function ContactForm() {
             placeholder="Describe what you need — pickup/delivery address, items, timing, etc."
           />
         </div>
+
+        <div>
+          <p className="block text-sm font-semibold text-brand-dark mb-3">
+            How did you hear about us?
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {[
+              'Google',
+              'Facebook',
+              'Instagram',
+              'Word of mouth',
+              'Street sign',
+              'Nextdoor',
+              'Business Card',
+              'Other',
+            ].map((option) => (
+              <label key={option} className="flex items-center gap-2 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  name="hear_about"
+                  value={option}
+                  className="w-4 h-4 rounded border-gray-300 accent-brand-gold cursor-pointer"
+                />
+                <span className="text-sm text-gray-700 group-hover:text-brand-dark transition-colors">
+                  {option}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {error && (
+          <p className="text-red-600 text-sm text-center">{error}</p>
+        )}
 
         <button
           type="submit"
