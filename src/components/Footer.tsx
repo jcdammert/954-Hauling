@@ -17,9 +17,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div>
-            <h3 className="text-white font-extrabold text-xl tracking-tight mb-4">
-              954 HAULING
-            </h3>
+            <img
+              src="/954haulinglogo.png"
+              alt="954 Hauling"
+              className="h-14 w-auto object-contain rounded-xl bg-white px-3 py-2 mb-4"
+            />
             <p className="text-white/40 text-sm leading-relaxed mb-6">
               South Florida&apos;s most trusted hauling, moving, and junk removal
               company. Locally owned and operated for over 5 years.
