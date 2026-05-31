@@ -45,12 +45,11 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-[72px]">
-          <Link href="/" className="flex items-center">
-            <img
-              src="/954haulinglogo.png"
-              alt="954 Hauling"
-              className="h-10 w-auto object-contain rounded-lg bg-white px-2 py-1"
-            />
+          <Link
+            href="/"
+            className="text-white font-extrabold text-xl tracking-tight hover:text-brand-gold transition-colors"
+          >
+            954 HAULING
           </Link>
 
           {/* Desktop Nav */}
