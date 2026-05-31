@@ -16,13 +16,13 @@ export default function Home() {
   return (
     <main>
       {/* ───── HERO ───── */}
-      <section className="relative gradient-dark text-white pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)',
-          backgroundSize: '32px 32px',
-        }} />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-gold/3 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4" />
+      <section className="relative text-white pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        {/* Background photo */}
+        <div className="absolute inset-0">
+          <img src="/f150wtrailer.jpg" alt="954 Hauling truck and trailer" className="w-full h-full object-cover object-center" />
+          {/* Dark tint overlay */}
+          <div className="absolute inset-0 bg-brand-dark/80" />
+        </div>
 
         <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
