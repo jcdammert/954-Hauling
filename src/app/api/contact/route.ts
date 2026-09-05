@@ -10,16 +10,26 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
+  const { turnstileToken } = body;
 
-  // Verify Turnstile token
-  const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secret: TURNSTILE_SECRET, response: body.turnstileToken }),
-  });
-  const turnstileData = await turnstileRes.json();
-  if (!turnstileData.success) {
+  // Block direct POST bots with no token
+  if (!turnstileToken) {
     return NextResponse.json({ error: 'Bot check failed' }, { status: 400 });
+  }
+
+  // Allow through if Turnstile had a network error (token = sentinel), but log it
+  if (turnstileToken !== '__unavailable__') {
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: TURNSTILE_SECRET, response: turnstileToken }),
+    });
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+      return NextResponse.json({ error: 'Bot check failed' }, { status: 400 });
+    }
+  } else {
+    console.warn('Turnstile unavailable — allowing submission through');
   }
 
   const payload = {
