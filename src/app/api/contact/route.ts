@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const GHL_WEBHOOK_URL = process.env.GHL_WEBHOOK_URL;
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY;
 
 export async function POST(req: NextRequest) {
   if (!GHL_WEBHOOK_URL) {
@@ -9,6 +10,17 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
+
+  // Verify Turnstile token
+  const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secret: TURNSTILE_SECRET, response: body.turnstileToken }),
+  });
+  const turnstileData = await turnstileRes.json();
+  if (!turnstileData.success) {
+    return NextResponse.json({ error: 'Bot check failed' }, { status: 400 });
+  }
 
   const payload = {
     first_name: body.firstName,

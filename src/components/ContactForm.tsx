@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import Script from 'next/script';
 import { Check } from '@/components/Icons';
+
+const TURNSTILE_SITE_KEY = '0x4AAAAAEpgS1RWRgtcbeUo';
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -15,9 +18,11 @@ export default function ContactForm() {
 
     const form = e.currentTarget;
     const data = new FormData(form);
+    const turnstileToken = data.get('cf-turnstile-response') as string;
     const payload = {
       ...Object.fromEntries(data.entries()),
       hear_about: data.getAll('hear_about').join(', '),
+      turnstileToken,
     };
 
     try {
@@ -57,6 +62,8 @@ export default function ContactForm() {
   }
 
   return (
+    <>
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" />
     <div className="bg-white rounded-2xl p-7 sm:p-8 border border-gray-100 shadow-sm">
       <h2 className="font-semibold text-xl text-brand-dark mb-6">
         Request a Free Quote
@@ -162,6 +169,12 @@ export default function ContactForm() {
           </div>
         )}
 
+        <div
+          className="cf-turnstile"
+          data-sitekey={TURNSTILE_SITE_KEY}
+          data-theme="light"
+        />
+
         <button
           type="submit"
           disabled={loading}
@@ -171,5 +184,6 @@ export default function ContactForm() {
         </button>
       </form>
     </div>
+    </>
   );
 }
