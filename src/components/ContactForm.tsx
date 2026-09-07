@@ -4,12 +4,13 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Script from 'next/script';
 import { Check } from '@/components/Icons';
 
-const TURNSTILE_SITE_KEY = '0x4AAAAAEpgS1RWRgtcbeUo';
+const TURNSTILE_SITE_KEY = '0x4AAAAAAEpgS1RWRgtcbeUo';
 
 declare global {
   interface Window {
     turnstile?: {
       render: (container: HTMLElement, options: Record<string, unknown>) => string;
+      execute: (widgetId: string) => void;
       reset: (widgetId: string) => void;
     };
   }
@@ -19,37 +20,15 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState('');
 
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const pendingPayloadRef = useRef<Record<string, unknown> | null>(null);
 
-  const renderWidget = useCallback(() => {
-    if (!window.turnstile || !containerRef.current || widgetIdRef.current) return;
-    widgetIdRef.current = window.turnstile.render(containerRef.current, {
-      sitekey: TURNSTILE_SITE_KEY,
-      callback: (token: string) => setTurnstileToken(token),
-      'expired-callback': () => setTurnstileToken(''),
-      'error-callback': () => setTurnstileToken('__unavailable__'),
-    });
-  }, []);
-
-  useEffect(() => {
-    if (window.turnstile) renderWidget();
-  }, [renderWidget]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const payload = {
-      ...Object.fromEntries(data.entries()),
-      hear_about: data.getAll('hear_about').join(', '),
-      turnstileToken,
-    };
+  const onToken = useCallback(async (token: string) => {
+    if (!pendingPayloadRef.current) return;
+    const payload = { ...pendingPayloadRef.current, turnstileToken: token };
+    pendingPayloadRef.current = null;
 
     try {
       const res = await fetch('/api/contact', {
@@ -57,17 +36,62 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-
-      if (!res.ok) throw new Error('Submission failed');
-
+      if (!res.ok) throw new Error('failed');
       setSubmitted(true);
     } catch {
       setError('Something went wrong. Please call us at (954) 666-5517.');
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current);
-        setTurnstileToken('');
       }
     } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const onExpired = useCallback(() => {
+    if (widgetIdRef.current && window.turnstile) {
+      window.turnstile.reset(widgetIdRef.current);
+    }
+    setError('Verification expired — please try again.');
+    setLoading(false);
+  }, []);
+
+  const onTurnstileError = useCallback(() => {
+    setError('Security check failed. Please refresh and try again.');
+    setLoading(false);
+  }, []);
+
+  const renderWidget = useCallback(() => {
+    if (!window.turnstile || !containerRef.current || widgetIdRef.current) return;
+    widgetIdRef.current = window.turnstile.render(containerRef.current, {
+      sitekey: TURNSTILE_SITE_KEY,
+      execution: 'execute',
+      callback: onToken,
+      'expired-callback': onExpired,
+      'error-callback': onTurnstileError,
+    });
+  }, [onToken, onExpired, onTurnstileError]);
+
+  useEffect(() => {
+    if (window.turnstile) renderWidget();
+  }, [renderWidget]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    pendingPayloadRef.current = {
+      ...Object.fromEntries(data.entries()),
+      hear_about: data.getAll('hear_about').join(', '),
+    };
+
+    if (widgetIdRef.current && window.turnstile) {
+      window.turnstile.execute(widgetIdRef.current);
+    } else {
+      setError('Security check not loaded — please refresh and try again.');
       setLoading(false);
     }
   };
@@ -203,7 +227,12 @@ export default function ContactForm() {
             </div>
           )}
 
-          <div ref={containerRef} className="hidden" />
+          {/* Turnstile mounts here — position:absolute + height:0 keeps it out of layout
+              without display:none, which would break the challenge iframe */}
+          <div
+            ref={containerRef}
+            style={{ position: 'absolute', height: 0, overflow: 'hidden' }}
+          />
 
           <button
             type="submit"
