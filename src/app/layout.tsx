@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -41,6 +42,11 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Script
+          src="https://links.scalemintsolutions.com/js/external-tracking.js"
+          data-tracking-id="tk_1e8fce3d2a79445daf83e6fc79dd1f2a"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
